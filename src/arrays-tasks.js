@@ -20,8 +20,9 @@
  *    getIntervalArray(0, 100) => [ 0, 1, 2, ..., 100 ]
  *    getIntervalArray(3, 3) => [ 3 ]
  */
-function getIntervalArray(/* start, end */) {
-  throw new Error('Not implemented');
+function getIntervalArray(start, end) {
+  const len = end - start + 1;
+  return Array.from({ length: len }, (_, i) => start + i);
 }
 
 /**
@@ -37,10 +38,19 @@ function getIntervalArray(/* start, end */) {
  *    sumArrays([10, 20, 30], [5, 10, 15]) => [15, 30, 45]
  *    sumArrays([-1, 0, 1], [1, 2, 3, 4]) => [0, 2, 4, 4]
  */
-function sumArrays(/* arr1, arr2 */) {
-  throw new Error('Not implemented');
+function sumArrays(arr1, arr2) {
+  if (!arr1.length) return arr2;
+  if (!arr2.length) return arr1;
+  let slice1 = [];
+  let slice2 = [];
+  if (arr1.length < arr2.length) {
+    slice1 = arr2.slice(0, arr1.length);
+    slice2 = arr2.slice(arr1.length);
+  } else {
+    slice1 = arr2;
+  }
+  return arr1.map((el, i) => el + slice1[i]).concat(slice2);
 }
-
 /**
  * Returns an index of the specified element in array or -1 if element is not found.
  *
@@ -53,8 +63,8 @@ function sumArrays(/* arr1, arr2 */) {
  *    findElement(['Array', 'Number', 'string'], 'Date') => -1
  *    findElement([0, 1, 2, 3, 4, 5], 5) => 5
  */
-function findElement(/* arr, value */) {
-  throw new Error('Not implemented');
+function findElement(arr, value) {
+  return arr.indexOf(value);
 }
 
 /**

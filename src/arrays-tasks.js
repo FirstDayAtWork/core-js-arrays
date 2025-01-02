@@ -335,9 +335,30 @@ function calculateBalance(arr) {
  *    createChunks(['a', 'b', 'c', 'd', 'e'], 2) => [['a', 'b'], ['c', 'd'], ['e']]
  *    createChunks([10, 20, 30, 40, 50], 1) => [[10], [20], [30], [40], [50]]
  */
-function createChunks(/* arr, chunkSize */) {
-  throw new Error('Not implemented');
+function createChunks(arr, chunkSize) {
+  return arr.reduce((a, _, i) => {
+    if (i % chunkSize === 0) {
+      a.push(arr.slice(i, i + chunkSize));
+    }
+    return a;
+  }, []);
 }
+// First try
+// function createChunks(arr, chunkSize) {
+//   const array = [];
+//   let start = 0;
+//   let end = chunkSize;
+//   arr.map((el, i) => {
+//     if (start > arr.length) {
+//       return array;
+//     }
+//     array.push(arr.slice(start, end));
+//     start += chunkSize;
+//     end += chunkSize;
+//     return array;
+//   });
+//   return array;
+// }
 
 /**
  * Generates an array of odd numbers of the specified length.
@@ -351,8 +372,8 @@ function createChunks(/* arr, chunkSize */) {
  *    generateOdds(2) => [ 1, 3 ]
  *    generateOdds(5) => [ 1, 3, 5, 7, 9 ]
  */
-function generateOdds(/* len */) {
-  throw new Error('Not implemented');
+function generateOdds(len) {
+  return Array.from({ length: len }, (_, i) => +!![] + i * (+!![] + +!!{}));
 }
 
 /**
@@ -367,9 +388,20 @@ function generateOdds(/* len */) {
  *   getElementByIndices(['one','two','three'], [2]) => 'three'  (arr[2])
  *   getElementByIndices([[[ 1, 2, 3]]], [ 0, 0, 1 ]) => 2        (arr[0][0][1])
  */
-function getElementByIndices(/* arr, indices */) {
-  throw new Error('Not implemented');
+function getElementByIndices(arr, indices) {
+  const last = indices[indices.length - +!![]];
+  const flat = arr.flat(Infinity);
+  return flat[last];
 }
+
+// 5 head solution
+// function getElementByIndices(arr, indices) {
+//   const len = indices.length;
+//   if (len === 1) return arr[indices[0]];
+//   if (len === 2) return arr[indices[0]][indices[1]];
+//   if (len === 3) return arr[indices[0]][indices[1]][indices[2]];
+//   return 0;
+// }
 
 /**
  * Returns the number of all falsy values in the specified array.
@@ -383,8 +415,8 @@ function getElementByIndices(/* arr, indices */) {
  *  getFalsyValuesCount([ -1, 'false', null, 0 ]) => 2
  *  getFalsyValuesCount([ null, undefined, NaN, false, 0, '' ]) => 6
  */
-function getFalsyValuesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getFalsyValuesCount(arr) {
+  return arr.filter((el) => !el).length;
 }
 
 /**
@@ -405,8 +437,12 @@ function getFalsyValuesCount(/* arr */) {
  *                              [0,0,0,1,0],
  *                              [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  return Array.from({ length: n }, (_, i) =>
+    Array.from({ length: n }, (__, b) => {
+      return i === b ? 1 : 0;
+    })
+  );
 }
 
 /**
